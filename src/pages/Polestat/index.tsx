@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import Button from '../../components/atoms/Button';
+import Section from '../../components/atoms/Section';
+import Banner from '../../components/molecures/Banner';
 // PC IMG
-import PC_POLSTA_BANNER_PNG from '../../assets/images/pc/pc_banner.png';
 import PC_POLESTAT_PNG from '../../assets/images/pc/pc_snow.png';
 import PC_MAGNESIUM_PNG from '../../assets/images/pc/pc_magnesium.png';
 import PC_VOID_PNG from '../../assets/images/pc/pc_void.png';
@@ -15,7 +17,6 @@ import PC_PROGRESS_PNG from '../../assets/images/pc/pc_progress.png';
 import PC_SHIPPING_PNG from '../../assets/images/pc/pc_shipping.png';
 
 // TABELT IMG
-import TABLET_BANNER_PNG from '../../assets/images/tablet/tablet_banner.png';
 import TABLET_SNOW_PNG from '../../assets/images/tablet/tablet_snow.png';
 import TABLET_MAGNESIUM_PNG from '../../assets/images/tablet/tablet_magnesium.png';
 import TABLET_BANK_PNG from '../../assets/images/tablet/tablet_bank.png';
@@ -27,7 +28,16 @@ import TABLET_TACK_PNG from '../../assets/images/tablet/tablet_tack.png';
 import TABLET_PROGRESS_PNG from '../../assets/images/tablet/tablet_progress.png';
 import TABLET_SHIPPING_PNG from '../../assets/images/tablet/tablet_shipping.png';
 
-// MOBILE IMG
+import MOBILE_SNOW_PNG from '../../assets/images/mobile/tablet_snow.png';
+import MOBILE_MAGNESIUM_PNG from '../../assets/images/mobile/tablet_magnesium.png';
+import MOBILE_BANK_PNG from '../../assets/images/mobile/tablet_bank.png';
+import MOBILE_CHECK_PNG from '../../assets/images/mobile/tablet_check.png';
+import MOBILE_CALENDAR_PNG from '../../assets/images/mobile/tablet_calendar.png';
+import MOBILE_BATTERY_PNG from '../../assets/images/mobile/tablet_battery.png';
+import MOBILE_MEMO_PNG from '../../assets/images/mobile/tablet_memo.png';
+import MOBILE_TACK_PNG from '../../assets/images/mobile/tablet_tack.png';
+import MOBILE_PROGRESS_PNG from '../../assets/images/mobile/tablet_progress.png';
+import MOBILE_SHIPPING_PNG from '../../assets/images/mobile/tablet_shipping.png';
 
 interface PolstaProps {}
 
@@ -180,8 +190,8 @@ const Polestat: React.FC<PolstaProps> = () => {
 
   return (
     <StyledMain>
-      <StyledBanner />
-      <StyledSection>
+      <Banner />
+      <Section>
         <StyledArticle top={5} left={2} bottom={5}>
           <StyledBox>
             <StyledPolestatTitle textAlign="left" lineHeight={100} className="tablet__polestat-title">
@@ -197,10 +207,16 @@ const Polestat: React.FC<PolstaProps> = () => {
             </StyledPolestatList>
           </StyledBox>
         </StyledArticle>
-      </StyledSection>
-      <StyledSection color="lightGray">
+      </Section>
+      <Section color="lightGray">
         <StyledArticle top={5} left={2} bottom={2}>
-          <StyledPolestatTitle textAlign="center" fontSize="medium" fontWight={700} lineHeight={61} className="tablet__sk-title">
+          <StyledPolestatTitle
+            textAlign="center"
+            fontSize="medium"
+            fontWight={700}
+            lineHeight={61}
+            className="tablet__sk-title"
+          >
             PoleStar SK 렌터카에서 <br />
             사전 예약을 해야하는 이유!
           </StyledPolestatTitle>
@@ -211,12 +227,20 @@ const Polestat: React.FC<PolstaProps> = () => {
               </StyledReservationItem>
             ))}
           </StyledReservationList>
-          <StyledReservationContent>※ 사전 예약 순서대로 게약 가능 시점에 SK 렌터카에서 연락드립니다.</StyledReservationContent>
+          <StyledReservationContent>
+            ※ 사전 예약 순서대로 게약 가능 시점에 SK 렌터카에서 연락드립니다.
+          </StyledReservationContent>
         </StyledArticle>
-      </StyledSection>
-      <StyledSection>
+      </Section>
+      <Section>
         <StyledArticle top={5} left={2} bottom={5}>
-          <StyledPolestatTitle textAlign="center" fontSize="medium" fontWight={700} lineHeight={61} className="tablet__way-title">
+          <StyledPolestatTitle
+            textAlign="center"
+            fontSize="medium"
+            fontWight={700}
+            lineHeight={61}
+            className="tablet__way-title"
+          >
             사전 예약 방법
           </StyledPolestatTitle>
           <StyleCardList>
@@ -227,10 +251,17 @@ const Polestat: React.FC<PolstaProps> = () => {
             ))}
           </StyleCardList>
         </StyledArticle>
-      </StyledSection>
-      <StyledSection color="apricot">
+      </Section>
+      <Section color="apricot">
         <StyledArticle top={5} bottom={5} left={15}>
-          <StyledPolestatTitle textAlign="center" fontSize="small" fontWight={700} lineHeight={44} bottom={2} className="tablet__reservation-title">
+          <StyledPolestatTitle
+            textAlign="center"
+            fontSize="small"
+            fontWight={700}
+            lineHeight={44}
+            bottom={2}
+            className="tablet__reservation-title"
+          >
             유의사항
           </StyledPolestatTitle>
           <StyledHr />
@@ -247,16 +278,19 @@ const Polestat: React.FC<PolstaProps> = () => {
             ))}
           </StyledNoticeList>
         </StyledArticle>
-      </StyledSection>
+      </Section>
       <StyledFooter>
         <StyledAddress>
-          주소 : 서울특별시 구로구 서부샛길 822(구로동) ㅣ 상호명 : SK렌터카(주) ㅣ 대표이사 : 황일문 ㅣ 사업자번호 : 113-81-32864 ㅣ통신판매업신고 : 구로구청 제2006-03389 ㅣ TEL : 1599-9111
+          주소 : 서울특별시 구로구 서부샛길 822(구로동) ㅣ 상호명 : SK렌터카(주) ㅣ 대표이사 : 황일문 ㅣ 사업자번호 :
+          113-81-32864 ㅣ통신판매업신고 : 구로구청 제2006-03389 ㅣ TEL : 1599-9111
         </StyledAddress>
         <StyledAddress>Copyright ⓒ SK렌터카 AII Rights Reserved</StyledAddress>
       </StyledFooter>
-      <StyledSection textAlign="center" bottom={1}>
-        <StyledReservationButton>사전예약 참여하기</StyledReservationButton>
-      </StyledSection>
+      <Section textAlign="center" bottom={1}>
+        <Button width={600} height={80} lineHeight={26} fontSize={24}>
+          사전예약 참여하기
+        </Button>
+      </Section>
     </StyledMain>
   );
 };
@@ -265,33 +299,7 @@ export default Polestat;
 
 const StyledMain = styled.main``;
 
-const StyledSection = styled.section<{ color?: string; textAlign?: string; bottom?: number }>`
-  width: 100%;
-  text-align: ${(props) => props.textAlign};
-  margin: ${(props) => props.bottom}% 0;
-
-  background: ${(props) => {
-    switch (props.color) {
-      case 'lightGray':
-        return '#F8F8F7';
-      case 'apricot':
-        return '#F5EDE7';
-    }
-  }};
-`;
-
 const StyledBox = styled.div``;
-const StyledBanner = styled.section`
-  width: 100%;
-  height: 804px;
-  background: center/cover url(${PC_POLSTA_BANNER_PNG});
-
-  ${({ theme }) => theme.breakpoints.tablet} {
-    width: 100%;
-    height: 900px;
-    background: center/cover url(${TABLET_BANNER_PNG});
-  }
-`;
 
 const StyledArticle = styled.article<{ top?: number; left?: number; bottom?: number }>`
   margin: 0 auto;
@@ -511,25 +519,4 @@ const StyledAddress = styled.address`
   font-size: 18px;
   line-height: 25px;
   color: #cdcdcd;
-`;
-
-const StyledReservationButton = styled.button`
-  width: 600px;
-  height: 80px;
-  width: 600px;
-  height: 80px;
-  text-align: center;
-  background: #ff7402;
-  color: #fff;
-  font-family: 'Noto Sans';
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 26px;
-
-  ${({ theme }) => theme.breakpoints.tablet} {
-    width: 600px;
-    height: 80px;
-    font-size: 24px;
-    line-height: 26px;
-  }
 `;
