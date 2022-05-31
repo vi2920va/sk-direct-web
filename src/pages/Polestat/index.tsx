@@ -1,22 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { customMedia } from '../../styles/theme';
-
+// PC IMG
 import PC_POLSTA_BANNER_PNG from '../../assets/images/pc/pc_banner.png';
 import PC_POLESTAT_PNG from '../../assets/images/pc/pc_snow.png';
 import PC_MAGNESIUM_PNG from '../../assets/images/pc/pc_magnesium.png';
 import PC_VOID_PNG from '../../assets/images/pc/pc_void.png';
-
 import PC_BANK_PNG from '../../assets/images/pc/pc_bank.png';
 import PC_CHECK_PNG from '../../assets/images/pc/pc_check.png';
 import PC_CALENDAR_PNG from '../../assets/images/pc/pc_calendar.png';
 import PC_BATTERY_PNG from '../../assets/images/pc/pc_battery.png';
-
 import PC_MEMO_PNG from '../../assets/images/pc/pc_memo.png';
 import PC_TACK_PNG from '../../assets/images/pc/pc_tack.png';
 import PC_PROGRESS_PNG from '../../assets/images/pc/pc_progress.png';
 import PC_SHIPPING_PNG from '../../assets/images/pc/pc_shipping.png';
-import { LargeNumberLike } from 'crypto';
+
+// TABELT IMG
+import TABLET_BANNER_PNG from '../../assets/images/tablet/tablet_banner.png';
+import TABLET_SNOW_PNG from '../../assets/images/tablet/tablet_snow.png';
+import TABLET_MAGNESIUM_PNG from '../../assets/images/tablet/tablet_magnesium.png';
+import TABLET_BANK_PNG from '../../assets/images/tablet/tablet_bank.png';
+import TABLET_CHECK_PNG from '../../assets/images/tablet/tablet_check.png';
+import TABLET_CALENDAR_PNG from '../../assets/images/tablet/tablet_calendar.png';
+import TABLET_BATTERY_PNG from '../../assets/images/tablet/tablet_battery.png';
+import TABLET_MEMO_PNG from '../../assets/images/tablet/tablet_memo.png';
+import TABLET_TACK_PNG from '../../assets/images/tablet/tablet_tack.png';
+import TABLET_PROGRESS_PNG from '../../assets/images/tablet/tablet_progress.png';
+import TABLET_SHIPPING_PNG from '../../assets/images/tablet/tablet_shipping.png';
+
+// MOBILE IMG
 
 interface PolstaProps {}
 
@@ -98,32 +109,103 @@ const NOTICE_LIST = [
 ];
 
 const Polestat: React.FC<PolstaProps> = () => {
+  const [screenWidth, setsScreenWidth] = useState(window.innerWidth);
+  const [polestatList, setPolestatList] = useState(POLESTAT_LIST);
+  const [iconList, setIconList] = useState(ICON_LIST);
+  const [cardList, setCardList] = useState(CARD_LIST);
+  useEffect(() => {
+    const handleWindowSize = () => {
+      setsScreenWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleWindowSize);
+
+    return () => {
+      window.addEventListener('remove', handleWindowSize);
+    };
+  }, []);
+  useEffect(() => {
+    if (screenWidth <= 768) {
+      setPolestatList([
+        {
+          name: 'snow',
+          image: TABLET_SNOW_PNG,
+        },
+        {
+          name: 'magnesium',
+          image: TABLET_MAGNESIUM_PNG,
+        },
+      ]);
+
+      setIconList([
+        {
+          name: '보조금 소진 전\n치량확보',
+          image: TABLET_BANK_PNG,
+        },
+        {
+          name: "복잡한 전기차\n'보조금 신정절차'는\n SK렌터카 대신!",
+          image: TABLET_CHECK_PNG,
+        },
+        {
+          name: "SK 렌터카만의\n'빠른차량 출고'",
+          image: TABLET_CALENDAR_PNG,
+        },
+        {
+          name: '구매시,\n 1년 무료 충전 혜택',
+          image: TABLET_BATTERY_PNG,
+        },
+      ]);
+      setCardList([
+        {
+          name: 'step1',
+          image: TABLET_MEMO_PNG,
+        },
+        {
+          name: 'step2',
+          image: TABLET_TACK_PNG,
+        },
+        {
+          name: 'stp3',
+          image: TABLET_PROGRESS_PNG,
+        },
+        {
+          name: 'step4',
+          image: TABLET_SHIPPING_PNG,
+        },
+      ]);
+    } else {
+      setPolestatList(POLESTAT_LIST);
+    }
+  }, [screenWidth]);
+
   return (
     <StyledMain>
       <StyledBanner />
       <StyledSection>
         <StyledArticle top={5} left={2} bottom={5}>
-          <StyledPolestatTitle textAlign="left" lineHeight={100}>
-            PoleStar 2
-          </StyledPolestatTitle>
-          <StyledSubTitle>Long Range Single Motor</StyledSubTitle>
-          <StyledPolestatList>
-            {POLESTAT_LIST.map((polestat, index) => (
-              <StyledPolestatItem key={index}>
-                <img src={polestat.image} alt={polestat.name} />
-              </StyledPolestatItem>
-            ))}
-          </StyledPolestatList>
+          <StyledBox>
+            <StyledPolestatTitle textAlign="left" lineHeight={100} className="tablet__polestat-title">
+              PoleStar 2
+            </StyledPolestatTitle>
+            <StyledSubTitle>Long Range Single Motor</StyledSubTitle>
+            <StyledPolestatList>
+              {polestatList.map((polestat, index) => (
+                <StyledPolestatItem key={index}>
+                  <img src={polestat.image} alt={polestat.name} />
+                </StyledPolestatItem>
+              ))}
+            </StyledPolestatList>
+          </StyledBox>
         </StyledArticle>
       </StyledSection>
       <StyledSection color="lightGray">
         <StyledArticle top={5} left={2} bottom={2}>
-          <StyledPolestatTitle textAlign="center" fontSize="medium" fontWight={700} lineHeight={61}>
+          <StyledPolestatTitle textAlign="center" fontSize="medium" fontWight={700} lineHeight={61} className="tablet__sk-title">
             PoleStar SK 렌터카에서 <br />
             사전 예약을 해야하는 이유!
           </StyledPolestatTitle>
           <StyledReservationList>
-            {ICON_LIST.map((icon, index) => (
+            {iconList.map((icon, index) => (
               <StyledReservationItem key={index}>
                 <img src={icon.image} alt={icon.name} />
               </StyledReservationItem>
@@ -134,11 +216,11 @@ const Polestat: React.FC<PolstaProps> = () => {
       </StyledSection>
       <StyledSection>
         <StyledArticle top={5} left={2} bottom={5}>
-          <StyledPolestatTitle textAlign="center" fontSize="medium" fontWight={700} lineHeight={61}>
+          <StyledPolestatTitle textAlign="center" fontSize="medium" fontWight={700} lineHeight={61} className="tablet__way-title">
             사전 예약 방법
           </StyledPolestatTitle>
           <StyleCardList>
-            {CARD_LIST.map((card, index) => (
+            {cardList.map((card, index) => (
               <StyledCardItem key={index}>
                 <img src={card.image} alt={card.name} />
               </StyledCardItem>
@@ -148,7 +230,7 @@ const Polestat: React.FC<PolstaProps> = () => {
       </StyledSection>
       <StyledSection color="apricot">
         <StyledArticle top={5} bottom={5} left={15}>
-          <StyledPolestatTitle textAlign="center" fontSize="small" fontWight={700} lineHeight={44} bottom={2}>
+          <StyledPolestatTitle textAlign="center" fontSize="small" fontWight={700} lineHeight={44} bottom={2} className="tablet__reservation-title">
             유의사항
           </StyledPolestatTitle>
           <StyledHr />
@@ -198,15 +280,25 @@ const StyledSection = styled.section<{ color?: string; textAlign?: string; botto
   }};
 `;
 
+const StyledBox = styled.div``;
 const StyledBanner = styled.section`
   width: 100%;
   height: 804px;
   background: center/cover url(${PC_POLSTA_BANNER_PNG});
+
+  ${({ theme }) => theme.breakpoints.tablet} {
+    width: 100%;
+    height: 900px;
+    background: center/cover url(${TABLET_BANNER_PNG});
+  }
 `;
 
 const StyledArticle = styled.article<{ top?: number; left?: number; bottom?: number }>`
   margin: 0 auto;
   padding: ${(props) => props.top}% ${(props) => props.left}% ${(props) => props.bottom}%;
+  ${({ theme }) => theme.breakpoints.tablet} {
+    padding: 0 5%;
+  }
 `;
 
 const StyledPolestatTitle = styled.h1<{
@@ -234,12 +326,38 @@ const StyledPolestatTitle = styled.h1<{
     }
   }};
 
-  ${customMedia.lessThan('tablet')`
-`}
+  .tablet__polestat-title {
+    ${({ theme }) => theme.breakpoints.tablet} {
+      margin-top: 7%;
+      font-weight: 400;
+      font-size: 80px;
+      line-height: 100%;
+    }
+  }
+  &.tablet__sk-title {
+    ${({ theme }) => theme.breakpoints.tablet} {
+      padding-top: 5%;
+      font-weight: 700;
+      font-size: 36px;
+      line-height: 140%;
+    }
+  }
+  &.tablet__reservation-title {
+    ${({ theme }) => theme.breakpoints.tablet} {
+      padding-top: 7%;
+      font-size: 20px;
+      line-height: 27px;
+    }
+  }
 
-  ${customMedia.lessThan('mobile')`
-
-`}
+  &.tablet__way-title {
+    ${({ theme }) => theme.breakpoints.tablet} {
+      margin: 3% 0;
+      font-weight: 700;
+      font-size: 36px;
+      line-height: 140%;
+    }
+  }
 `;
 
 const StyledHr = styled.hr`
@@ -252,6 +370,12 @@ const StyledSubTitle = styled.h2`
   line-height: 120%;
   letter-spacing: -0.02em;
   color: #52565a;
+
+  ${({ theme }) => theme.breakpoints.tablet} {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 120%;
+  }
 `;
 
 const StyledPolestatList = styled.ul`
@@ -259,24 +383,47 @@ const StyledPolestatList = styled.ul`
   align-items: center;
   justify-content: center;
   margin-top: 5%;
+  overflow-y: hidden;
 `;
 
 const StyledPolestatItem = styled.li`
   padding: 10px;
+  overflow: hidden;
 `;
 
 const StyledReservationList = styled.ul`
   display: flex;
   justify-content: center;
   margin: 2% 0 0 0;
+
+  ${({ theme }) => theme.breakpoints.tablet} {
+    width: 768px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-align: center;
+  }
 `;
 
 const StyledReservationItem = styled.li`
   width: 243px;
   margin-right: 2%;
+  text-align: center;
 
   &:last-of-type {
     margin-right: 0;
+  }
+
+  ${({ theme }) => theme.breakpoints.tablet} {
+    img {
+      width: 220px;
+      width: 100%;
+      margin-right: 2%;
+    }
+
+    &:last-of-type {
+      margin-left: 0;
+    }
   }
 `;
 
@@ -288,6 +435,12 @@ const StyledReservationContent = styled.p`
   line-height: 32px;
   text-align: center;
   color: #52565a;
+
+  ${({ theme }) => theme.breakpoints.tablet} {
+    padding: 5% 0 5% 0;
+    font-size: 16px;
+    line-height: 23px;
+  }
 `;
 
 const StyleCardList = styled.ul`
@@ -295,6 +448,10 @@ const StyleCardList = styled.ul`
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 3%;
+  ${({ theme }) => theme.breakpoints.tablet} {
+    padding-right: 2%;
+    margin-bottom: 5%;
+  }
 `;
 
 const StyledCardItem = styled.li`
@@ -321,6 +478,11 @@ const StyledNoticeItem = styled.li`
     content: '•';
     margin-right: 5px;
   }
+  ${({ theme }) => theme.breakpoints.tablet} {
+    padding: 3px 0;
+    font-size: 14px;
+    line-height: 20px;
+  }
 `;
 
 const StyledNoticeTitle = styled.h3`
@@ -330,6 +492,10 @@ const StyledNoticeTitle = styled.h3`
   font-size: 25px;
   line-height: 40px;
   color: #101820;
+  ${({ theme }) => theme.breakpoints.tablet} {
+    font-size: 16px;
+    line-height: 24px;
+  }
 `;
 
 const StyledFooter = styled.footer`
@@ -359,4 +525,11 @@ const StyledReservationButton = styled.button`
   font-weight: 700;
   font-size: 24px;
   line-height: 26px;
+
+  ${({ theme }) => theme.breakpoints.tablet} {
+    width: 600px;
+    height: 80px;
+    font-size: 24px;
+    line-height: 26px;
+  }
 `;

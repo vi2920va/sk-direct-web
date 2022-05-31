@@ -2,6 +2,12 @@ import { DefaultTheme } from 'styled-components';
 
 import { generateMedia } from 'styled-media-query';
 
+const deviceSizes = {
+  mobile: '375px',
+  tablet: '768px',
+  laptop: '1024px',
+};
+
 export const theme: DefaultTheme = {
   colors: {
     white: '#fff',
@@ -12,10 +18,9 @@ export const theme: DefaultTheme = {
     darkGreen: '#37823C',
     orange: ' #FF792D',
   },
-  breakpoints: {},
+  breakpoints: {
+    mobile: `@media screen and (max-width: ${deviceSizes.mobile})`,
+    tablet: `@media screen and (max-width: ${deviceSizes.tablet})`,
+    laptop: `@media screen and (max-width: ${deviceSizes.laptop})`,
+  },
 };
-
-export const customMedia = generateMedia({
-  tablet: '760px',
-  mobile: '375px',
-});

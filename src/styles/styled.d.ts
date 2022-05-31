@@ -12,6 +12,10 @@ declare module 'styled-components' {
       orange: string;
     };
 
-    breakpoints: {};
+    breakpoints: {
+      mobile: string;
+      tablet: string;
+      laptop: string;
+    };
   }
 }
