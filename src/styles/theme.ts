@@ -1,7 +1,5 @@
 import { DefaultTheme } from 'styled-components';
 
-import { generateMedia } from 'styled-media-query';
-
 const deviceSizes = {
   mobile: '375px',
   tablet: '768px',
