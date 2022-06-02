@@ -44,6 +44,7 @@ const StyledArtice = styled.article`
     height: 100%;
   }
 `;
+
 const StyledSection = styled.section`
   display: flex;
   justify-content: center;
