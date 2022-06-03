@@ -4,7 +4,7 @@ import Modal, { ModalProps } from '../../components/molecures/Modals/Modal';
 const useModals = () => {
   const [visible, setVisible] = useState(false);
 
-  const openModal = (modal: React.ReactNode) => {
+  const openModal = () => {
     setVisible(true);
   };
 
@@ -12,11 +12,13 @@ const useModals = () => {
     setVisible(false);
   };
 
-  const DefaultModal = (props: ModalProps) => {
-    <Modal {...props} />;
+  const defaultModal = (props: ModalProps) => {
+    visible && <Modal {...props} />;
   };
 
   return {
+    visible,
+    setVisible,
     openModal,
     closeModal,
   };
