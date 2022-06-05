@@ -43,7 +43,8 @@ const Modal: React.FC<ModalProps> = ({ title, width, footer, visible }) => {
               </StyledRentalDescList>
               <Styledhr />
               <StyledModalTitle fontSize={18} lineHeight={140} top={30} bottom={5}>
-                오직 사전 예약자 분들에게만 <br /> 계약 가능한 시점에 연락을 드릴 예정이에요.
+                오직 <StyledTopintText>사전예약자 </StyledTopintText>분들에게만 <br /> 계약 가능한 시점에 연락을 드릴
+                예정이에요.
               </StyledModalTitle>
               <StyledPrecautions bottom={40}>
                 ※ 사전예약을 완료하신 분들만 사전예약자 계약기간에 계약하실 수 있습니다.
@@ -132,6 +133,12 @@ const StyledModalTitle = styled.h2<{
   font-size: ${(props) => props.fontSize}px;
   line-height: ${(props) => props.lineHeight}%;
   color: #262628;
+`;
+const StyledTopintText = styled.span`
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 140%;
+  color: #f2434a;
 `;
 
 const StyledRentalDescList = styled.ul`

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import AlertModal from '../../components/molecures/Modals/AlertModal';
 import Modal, { ModalProps } from '../../components/molecures/Modals/Modal';
 
 const useModals = () => {
@@ -12,6 +13,10 @@ const useModals = () => {
     setVisible(false);
   };
 
+  const openAlertModal = () => {
+    visible && <AlertModal />;
+  };
+
   const defaultModal = (props: ModalProps) => {
     visible && <Modal {...props} />;
   };
@@ -21,6 +26,7 @@ const useModals = () => {
     setVisible,
     openModal,
     closeModal,
+    openAlertModal,
   };
 };
 
