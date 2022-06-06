@@ -6,13 +6,14 @@ const GlobalStyle = createGlobalStyle`
 
   body{
     overflow-x: hidden;
-    height: 100vh;
     width:100%;
+    height: 100vh;
   }
 
   html{
     width: 100%;
-    overflow-x: hidden;
+    height: 100%;
+    overflow-x: scroll;
   }
 
   * {
