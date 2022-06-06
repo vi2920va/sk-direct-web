@@ -3,10 +3,12 @@ import { NavLink } from "react-router-dom";
 import { colums } from "./constants";
 import LOGO_PNG from "../../../assets/images/pc/logo.png";
 import styled from "styled-components";
+import Button from "../../atoms/Button";
 
 interface MenusProps {}
 
 const Menus: React.FC<MenusProps> = () => {
+  const handleButtonPross = () => {};
   return (
     <StyleMenuWrapper>
       <StyledTitleLogo />
@@ -19,6 +21,14 @@ const Menus: React.FC<MenusProps> = () => {
           );
         })}
       </MenuList>
+      <Button
+        width={50}
+        height={30}
+        className="button-login"
+        onClick={handleButtonPross}
+      >
+        로그인
+      </Button>
     </StyleMenuWrapper>
   );
 };

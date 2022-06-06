@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 interface ButtonProps {
   width?: number;
@@ -11,7 +11,14 @@ interface ButtonProps {
   onClick?: () => void;
 }
 
-const Button: React.FC<ButtonProps> = ({ width, height, children, fontSize, onClick, ...resetProps }) => {
+const Button: React.FC<ButtonProps> = ({
+  width,
+  height,
+  children,
+  fontSize,
+  onClick,
+  ...resetProps
+}) => {
   const { className } = resetProps;
   return (
     <StyledButton
@@ -39,7 +46,7 @@ const StyledButton = styled.button<{
   height: ${(porps) => porps.height}px;
   font-size: ${(props) => props.fontSize}px;
   line-height: ${(props) => props.lineHeight}px;
-  font-family: 'Noto Sans';
+  font-family: "Noto Sans";
   font-weight: 700;
   text-align: center;
   background: #ff7402;
@@ -78,5 +85,13 @@ const StyledButton = styled.button<{
       font-size: 16px;
       line-height: 150%;
     }
+  }
+  &.button-login {
+    padding: 2px 4px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 10px;
+    background: #f7f7f9;
+    color: #3a3a3c;
   }
 `;
