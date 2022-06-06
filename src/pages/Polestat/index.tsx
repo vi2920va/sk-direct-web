@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import Button from '../../components/atoms/Button';
 import Section from '../../components/atoms/Section';
 import Banner from '../../components/molecures/Banner';
+import Modal from '../../components/molecures/Modals/Modal';
+import useModals from '../../hooks/useModals';
 import {
   POLESTAT_LIST_PC,
   POLESTAT_LIST_TABLET,
@@ -19,10 +21,20 @@ import {
 interface PolstaProps {}
 
 const Polestat: React.FC<PolstaProps> = () => {
+  const { openModal, visible, closeModal } = useModals();
+  console.log('visible: ', visible);
   const [screenWidth, setsScreenWidth] = useState(window.innerWidth);
   const [polestatList, setPolestatList] = useState(POLESTAT_LIST_PC);
   const [iconList, setIconList] = useState(ICON_LIST_PC);
   const [cardList, setCardList] = useState(CARD_LIST_PC);
+
+  const handleButtonProess = () => {
+    openModal();
+  };
+
+  const onClose = () => {
+    closeModal();
+  };
   useEffect(() => {
     const handleWindowSize = () => {
       setsScreenWidth(window.innerWidth);
@@ -57,109 +69,112 @@ const Polestat: React.FC<PolstaProps> = () => {
   }, [screenWidth]);
 
   return (
-    <StyledMain>
-      <Banner />
-      <Section>
-        <StyledArticle top={5} left={2} bottom={5} className="polestat__artice">
-          <StyledBox>
-            <StyledPolestatTitle textAlign="left" lineHeight={100} className="polestat__title-tablet">
-              PoleStar 2
+    <>
+      <StyledMain>
+        <Banner />
+        <Section>
+          <StyledArticle top={5} left={2} bottom={5} className="polestat__artice">
+            <StyledBox>
+              <StyledPolestatTitle textAlign="left" lineHeight={100} className="polestat__title-tablet">
+                PoleStar 2
+              </StyledPolestatTitle>
+              <StyledSubTitle>Long Range Single Motor</StyledSubTitle>
+              <StyledPolestatList>
+                {polestatList.map((polestat, index) => (
+                  <StyledPolestatItem key={index}>
+                    <img src={polestat.image} alt={polestat.name} />
+                  </StyledPolestatItem>
+                ))}
+              </StyledPolestatList>
+            </StyledBox>
+          </StyledArticle>
+        </Section>
+        <Section color="lightGray">
+          <StyledArticle top={5} left={2} bottom={2}>
+            <StyledPolestatTitle
+              textAlign="center"
+              fontSize="medium"
+              fontWight={700}
+              lineHeight={61}
+              className="sk__title-tablet"
+            >
+              PoleStar SK 렌터카에서 <br />
+              사전 예약을 해야하는 이유!
             </StyledPolestatTitle>
-            <StyledSubTitle>Long Range Single Motor</StyledSubTitle>
-            <StyledPolestatList>
-              {polestatList.map((polestat, index) => (
-                <StyledPolestatItem key={index}>
-                  <img src={polestat.image} alt={polestat.name} />
-                </StyledPolestatItem>
+            <StyledReservationList>
+              {iconList.map((icon, index) => (
+                <StyledReservationItem key={index}>
+                  <img src={icon.image} alt={icon.name} />
+                </StyledReservationItem>
               ))}
-            </StyledPolestatList>
-          </StyledBox>
-        </StyledArticle>
-      </Section>
-      <Section color="lightGray">
-        <StyledArticle top={5} left={2} bottom={2}>
-          <StyledPolestatTitle
-            textAlign="center"
-            fontSize="medium"
-            fontWight={700}
-            lineHeight={61}
-            className="sk__title-tablet"
-          >
-            PoleStar SK 렌터카에서 <br />
-            사전 예약을 해야하는 이유!
-          </StyledPolestatTitle>
-          <StyledReservationList>
-            {iconList.map((icon, index) => (
-              <StyledReservationItem key={index}>
-                <img src={icon.image} alt={icon.name} />
-              </StyledReservationItem>
-            ))}
-          </StyledReservationList>
-          <StyledReservationContent>
-            ※ 사전 예약 순서대로 게약 가능 시점에 SK 렌터카에서 연락드립니다.
-          </StyledReservationContent>
-        </StyledArticle>
-      </Section>
-      <Section>
-        <StyledArticle top={5} left={2} bottom={5}>
-          <StyledPolestatTitle
-            textAlign="center"
-            fontSize="medium"
-            fontWight={700}
-            lineHeight={61}
-            className="way__title-tablet"
-          >
-            사전 예약 방법
-          </StyledPolestatTitle>
-          <StyleCardList>
-            {cardList.map((card, index) => (
-              <StyledCardItem key={index}>
-                <img src={card.image} alt={card.name} />
-              </StyledCardItem>
-            ))}
-          </StyleCardList>
-        </StyledArticle>
-      </Section>
-      <Section color="apricot">
-        <StyledArticle top={5} bottom={5} left={15}>
-          <StyledPolestatTitle
-            textAlign="center"
-            fontSize="small"
-            fontWight={700}
-            lineHeight={44}
-            bottom={2}
-            className="reservation__title-tablet"
-          >
-            유의사항
-          </StyledPolestatTitle>
-          <StyledHr />
-          <StyledNoticeList>
-            {NOTICE_LIST.map((notice, index) => (
-              <StyledNoticeItem key={index} className="notices__title">
-                <StyledNoticeTitle>{notice.title}</StyledNoticeTitle>
-                <StyledNoticeList>
-                  {notice.contents.map((content, index) => (
-                    <StyledNoticeItem key={index}>{content}</StyledNoticeItem>
-                  ))}
-                </StyledNoticeList>
-              </StyledNoticeItem>
-            ))}
-          </StyledNoticeList>
-        </StyledArticle>
-      </Section>
-      <StyledFooter>
-        <StyledAddress>
-          주소 : 서울특별시 구로구 서부샛길 822(구로동) ㅣ 상호명 : SK렌터카(주) ㅣ 대표이사 : 황일문 ㅣ 사업자번호 :
-          113-81-32864 ㅣ통신판매업신고 : 구로구청 제2006-03389 ㅣ TEL : 1599-9111
-        </StyledAddress>
-        <StyledAddress>Copyright ⓒ SK렌터카 AII Rights Reserved</StyledAddress>
-      </StyledFooter>
-      <Section textAlign="center" bottom={1}>
-        <Button width={600} height={80} lineHeight={26} fontSize={24}>
-          사전예약 참여하기
-        </Button>
-      </Section>
-    </StyledMain>
+            </StyledReservationList>
+            <StyledReservationContent>
+              ※ 사전 예약 순서대로 게약 가능 시점에 SK 렌터카에서 연락드립니다.
+            </StyledReservationContent>
+          </StyledArticle>
+        </Section>
+        <Section>
+          <StyledArticle top={5} left={2} bottom={5}>
+            <StyledPolestatTitle
+              textAlign="center"
+              fontSize="medium"
+              fontWight={700}
+              lineHeight={61}
+              className="way__title-tablet"
+            >
+              사전 예약 방법
+            </StyledPolestatTitle>
+            <StyleCardList>
+              {cardList.map((card, index) => (
+                <StyledCardItem key={index}>
+                  <img src={card.image} alt={card.name} />
+                </StyledCardItem>
+              ))}
+            </StyleCardList>
+          </StyledArticle>
+        </Section>
+        <Section color="apricot">
+          <StyledArticle top={5} bottom={5} left={15}>
+            <StyledPolestatTitle
+              textAlign="center"
+              fontSize="small"
+              fontWight={700}
+              lineHeight={44}
+              bottom={2}
+              className="reservation__title-tablet"
+            >
+              유의사항
+            </StyledPolestatTitle>
+            <StyledHr />
+            <StyledNoticeList>
+              {NOTICE_LIST.map((notice, index) => (
+                <StyledNoticeItem key={index} className="notices__title">
+                  <StyledNoticeTitle>{notice.title}</StyledNoticeTitle>
+                  <StyledNoticeList>
+                    {notice.contents.map((content, index) => (
+                      <StyledNoticeItem key={index}>{content}</StyledNoticeItem>
+                    ))}
+                  </StyledNoticeList>
+                </StyledNoticeItem>
+              ))}
+            </StyledNoticeList>
+          </StyledArticle>
+        </Section>
+        <StyledFooter>
+          <StyledAddress>
+            주소 : 서울특별시 구로구 서부샛길 822(구로동) ㅣ 상호명 : SK렌터카(주) ㅣ 대표이사 : 황일문 ㅣ 사업자번호 :
+            113-81-32864 ㅣ통신판매업신고 : 구로구청 제2006-03389 ㅣ TEL : 1599-9111
+          </StyledAddress>
+          <StyledAddress>Copyright ⓒ SK렌터카 AII Rights Reserved</StyledAddress>
+        </StyledFooter>
+        <Section textAlign="center" bottom={1}>
+          <Button width={600} height={80} lineHeight={26} fontSize={24} onClick={handleButtonProess}>
+            사전예약 참여하기
+          </Button>
+        </Section>
+      </StyledMain>
+      <Modal title="사전예약 신청서를 작성해주세요" visible={visible} onClose={onClose} />
+    </>
   );
 };
 

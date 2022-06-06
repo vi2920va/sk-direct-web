@@ -1,29 +1,52 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 interface ButtonProps {
   width?: number;
-  height: number;
-  fontSize: number;
+  height?: number;
+  fontSize?: number;
   lineHeight?: number;
-  children?: string | React.ReactNode;
+  children?: React.ReactNode;
+  className?: string;
+  onClick?: () => void;
 }
 
-const Button: React.FC<ButtonProps> = ({ width, height, children, fontSize, ...resetProps }) => {
+const Button: React.FC<ButtonProps> = ({
+  width,
+  height,
+  children,
+  fontSize,
+  onClick,
+  ...resetProps
+}) => {
+  const { className } = resetProps;
   return (
-    <StyledButton {...resetProps} width={width} height={height} fontSize={fontSize}>
+    <StyledButton
+      {...resetProps}
+      className={className}
+      width={width}
+      height={height}
+      fontSize={fontSize}
+      onClick={onClick}
+    >
       {children}
     </StyledButton>
   );
 };
 export default Button;
 
-const StyledButton = styled.button<{ width?: number; height?: number; fontSize?: number; lineHeight?: number }>`
+const StyledButton = styled.button<{
+  width?: number;
+  height?: number;
+  fontSize?: number;
+  lineHeight?: number;
+  color?: string;
+}>`
   width: ${(props) => props.width}px;
   height: ${(porps) => porps.height}px;
   font-size: ${(props) => props.fontSize}px;
   line-height: ${(props) => props.lineHeight}px;
-  font-family: 'Noto Sans';
+  font-family: "Noto Sans";
   font-weight: 700;
   text-align: center;
   background: #ff7402;
@@ -40,5 +63,35 @@ const StyledButton = styled.button<{ width?: number; height?: number; fontSize?:
     height: 56px;
     font-size: 18px;
     line-height: 24px;
+  }
+
+  &.button-close {
+    display: inline-block;
+    text-align: right;
+    background: transparent;
+
+    img {
+      height: 14px;
+      width: 14px;
+    }
+  }
+  &.button-reservation {
+    margin-top: 30px;
+    border-radius: 8px;
+    background: #f2434a;
+
+    span {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 150%;
+    }
+  }
+  &.button-login {
+    padding: 2px 4px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 10px;
+    background: #f7f7f9;
+    color: #3a3a3c;
   }
 `;

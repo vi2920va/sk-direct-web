@@ -1,18 +1,17 @@
-import { createGlobalStyle } from 'styled-components';
-import { reset } from 'styled-reset';
+import { createGlobalStyle } from "styled-components";
+import { reset } from "styled-reset";
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
 
   body{
     overflow-x: hidden;
-    height: 100vh;
     width:100%;
   }
 
-  html, #root{
+  html{
     width: 100%;
-    overflow-x: hidden;
+
   }
 
   * {
