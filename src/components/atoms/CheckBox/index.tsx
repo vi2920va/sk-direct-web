@@ -1,8 +1,7 @@
-import { check } from 'prettier';
-import React from 'react';
-import styled from 'styled-components';
-import CHECK_ICON from '../../../assets/icons/check.svg';
-import CHECKED_ICON from '../../../assets/icons/checked.svg';
+import React from "react";
+import styled from "styled-components";
+import CHECK_ICON from "../../../assets/icons/check.svg";
+import CHECKED_ICON from "../../../assets/icons/checked.svg";
 
 interface CheckBoxProps {
   isChecked?: boolean;
@@ -11,7 +10,7 @@ interface CheckBoxProps {
 const CheckBox: React.FC<CheckBoxProps> = ({ isChecked }) => {
   return (
     <StyledLabel htmlFor="inputCheckbox" value={isChecked}>
-      <StyledInput type={'checkbox'} id="inputCheckbox" checked={isChecked} />
+      <StyledInput type={"checkbox"} id="inputCheckbox" checked={isChecked} />
     </StyledLabel>
   );
 };
@@ -31,7 +30,8 @@ const StyledLabel = styled.label<{ value?: boolean }>`
   width: 24px;
   height: 24px;
   margin-right: 10px;
-  background: center/cover url(${(props) => (props.value ? CHECKED_ICON : CHECK_ICON)});
+  background: center/cover
+    url(${(props) => (props.value ? CHECKED_ICON : CHECK_ICON)});
   vertical-align: middle;
   stroke: black;
 `;

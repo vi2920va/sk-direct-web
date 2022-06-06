@@ -1,4 +1,7 @@
 export enum PATH {
-  HOME = '/',
-  OBSERVER = '/observer',
+  HOME = "/",
+  ORGANRENTA = "/organrental",
+  TACOPAY = "/tacopay",
+  MYPAGE = "/mypage",
+  PROMOTION = "/promotion",
 }
