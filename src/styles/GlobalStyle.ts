@@ -10,7 +10,7 @@ const GlobalStyle = createGlobalStyle`
     width:100%;
   }
 
-  html, #root{
+  html{
     width: 100%;
     overflow-x: hidden;
   }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Portal from '../Portal';
 import Button from '../../../atoms/Button';
@@ -6,8 +6,11 @@ import { RENTAL_DESCRIPTION } from '../constants';
 import close from '../../../../assets/icons/close.svg';
 import MODAL_BANNER_PNG from '../../../../assets/images/pc/modal_banner.png';
 import CheckBox from '../../../atoms/CheckBox';
+import useModals from '../../../../hooks/useModals';
+import { AlertModalProps } from '../AlertModal';
 
 export interface ModalProps {
+  error?: boolean;
   title?: string;
   footer?: React.ReactNode;
   width?: number;
@@ -18,16 +21,29 @@ export interface ModalProps {
   isOneBtn?: boolean;
   children?: React.ReactNode;
   visible?: boolean;
+  onClose?: () => void;
+  handleButtonProess?: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ title, width, footer, visible }) => {
+const Modal: React.FC<ModalProps> = ({ title, width, footer, visible, onClose }) => {
+  const [error, setError] = useState(true);
+  const { openAlertModal } = useModals();
+
+  const handleButtonProess = () => {
+    return openAlertModal({
+      width: 350,
+      title: '죄송합니다.',
+      contents: '죄송합니다.',
+    });
+  };
+
   return (
     <>
       {visible && (
         <Portal>
           <StyledModal>
             <StyledModalHeader>
-              <Button className="button-close">
+              <Button className="button-close" onClick={onClose}>
                 <img src={close} alt="close" />
               </Button>
             </StyledModalHeader>
@@ -59,8 +75,8 @@ const Modal: React.FC<ModalProps> = ({ title, width, footer, visible }) => {
                   <StyledTableth>이용목적</StyledTableth>
                   <StyledTableth>보유기간</StyledTableth>
                 </StyledTableRow>
-                <StyledTableRow className="table__desc-row">
-                  <StyledTabletd>성명 휴대폰 번호</StyledTabletd>
+                <StyledTableRow>
+                  <StyledTabletd>성명, 휴대폰, 번호</StyledTabletd>
                   <StyledTabletd>
                     <ul>
                       <li>사전예약 신청 확인</li>
@@ -76,7 +92,7 @@ const Modal: React.FC<ModalProps> = ({ title, width, footer, visible }) => {
               </StyledPrecautions>
             </StyledModalBody>
             <StyledModalFooter>
-              <Button width={488} height={56} className="button-reservation">
+              <Button width={488} height={56} className="button-reservation" onClick={handleButtonProess}>
                 <span>사전예약 신청하기</span>
               </Button>
             </StyledModalFooter>
@@ -116,8 +132,8 @@ const StyledModalBody = styled.section`
 `;
 
 const StyledModalBanner = styled.div`
-  width: 488px;
-  height: 101px;
+  width: 494px;
+  height: 102px;
   background: center/cover url(${MODAL_BANNER_PNG});
 `;
 
@@ -186,14 +202,8 @@ const StyledTable = styled.table`
 `;
 
 const StyledTableRow = styled.tr`
-  padding: 8px 25px;
   height: 34px;
   line-height: 34px;
-
-  &.table__desc-row {
-    height: 52px;
-    line-height: 52px;
-  }
 `;
 
 const StyledTableth = styled.th`
@@ -212,15 +222,23 @@ const StyledTabletd = styled.td`
   line-height: 150%;
   color: #77777a;
   border-right: 1px solid #f5f5f5;
-  border-bottom: 1px solid #f5f5f5;
+  border-top: 1px solid #f5f5f5;
+
   &:first-of-type {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 120px;
   }
 
   &:nth-of-type(2) {
     width: 216px;
     text-align: left;
+
     li {
+      &:first-child {
+        margin-top: 10px;
+      }
       &::before {
         content: '•';
         margin-right: 5px;

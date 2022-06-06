@@ -21,7 +21,8 @@ import {
 interface PolstaProps {}
 
 const Polestat: React.FC<PolstaProps> = () => {
-  const { openModal, visible } = useModals();
+  const { openModal, visible, closeModal } = useModals();
+  console.log('visible: ', visible);
   const [screenWidth, setsScreenWidth] = useState(window.innerWidth);
   const [polestatList, setPolestatList] = useState(POLESTAT_LIST_PC);
   const [iconList, setIconList] = useState(ICON_LIST_PC);
@@ -29,9 +30,11 @@ const Polestat: React.FC<PolstaProps> = () => {
 
   const handleButtonProess = () => {
     openModal();
-    console.log(visible);
   };
 
+  const onClose = () => {
+    closeModal();
+  };
   useEffect(() => {
     const handleWindowSize = () => {
       setsScreenWidth(window.innerWidth);
@@ -170,7 +173,7 @@ const Polestat: React.FC<PolstaProps> = () => {
           </Button>
         </Section>
       </StyledMain>
-      <Modal visible={visible} title="사전예약 신청서를 작성해주세요" />
+      <Modal title="사전예약 신청서를 작성해주세요" visible={visible} onClose={onClose} />
     </>
   );
 };
