@@ -4,32 +4,44 @@ import { colums } from "./constants";
 import LOGO_PNG from "../../../assets/images/pc/logo.png";
 import styled from "styled-components";
 import Button from "../../atoms/Button";
+import useModals from "../../../hooks/useModals";
+import LoginModal from "../../molecures/Modals/LoginModal";
 
 interface MenusProps {}
 
 const Menus: React.FC<MenusProps> = () => {
-  const handleButtonPross = () => {};
+  const { visible, openModal, closeModal } = useModals();
+
+  const handleButtonPross = () => {
+    openModal();
+  };
+  const onClose = () => {
+    closeModal();
+  };
   return (
-    <StyleMenuWrapper>
-      <StyledTitleLogo />
-      <MenuList>
-        {colums.map((menu, index) => {
-          return (
-            <StyledLink to={menu.path} key={index}>
-              <span>{menu.title}</span>
-            </StyledLink>
-          );
-        })}
-      </MenuList>
-      <Button
-        width={50}
-        height={30}
-        className="button-login"
-        onClick={handleButtonPross}
-      >
-        로그인
-      </Button>
-    </StyleMenuWrapper>
+    <>
+      <StyleMenuWrapper>
+        <StyledTitleLogo />
+        <MenuList>
+          {colums.map((menu, index) => {
+            return (
+              <StyledLink to={menu.path} key={index}>
+                <span>{menu.title}</span>
+              </StyledLink>
+            );
+          })}
+        </MenuList>
+        <Button
+          width={50}
+          height={30}
+          className="button-login"
+          onClick={handleButtonPross}
+        >
+          로그인
+        </Button>
+      </StyleMenuWrapper>
+      {visible && <LoginModal visible={visible} onClose={onClose} />}
+    </>
   );
 };
 export default Menus;

@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import Portal from '../Portal';
-import Button from '../../../atoms/Button';
-import { RENTAL_DESCRIPTION } from '../constants';
-import close from '../../../../assets/icons/close.svg';
-import MODAL_BANNER_PNG from '../../../../assets/images/pc/modal_banner.png';
-import CheckBox from '../../../atoms/CheckBox';
-import useModals from '../../../../hooks/useModals';
-import { AlertModalProps } from '../AlertModal';
+import React, { useState } from "react";
+import styled from "styled-components";
+import Portal from "../Portal";
+import Button from "../../../atoms/Button";
+import { RENTAL_DESCRIPTION } from "../constants";
+import close from "../../../../assets/icons/close.svg";
+import MODAL_BANNER_PNG from "../../../../assets/images/pc/modal_banner.png";
+import CheckBox from "../../../atoms/CheckBox";
+import useModals from "../../../../hooks/useModals";
+import { AlertModalProps } from "../AlertModal";
 
 export interface ModalProps {
   error?: boolean;
@@ -25,16 +25,18 @@ export interface ModalProps {
   handleButtonProess?: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ title, width, footer, visible, onClose }) => {
+const Modal: React.FC<ModalProps> = ({
+  title,
+  width,
+  footer,
+  visible,
+  onClose,
+}) => {
   const [error, setError] = useState(true);
-  const { openAlertModal } = useModals();
+  const { openModal } = useModals();
 
   const handleButtonProess = () => {
-    return openAlertModal({
-      width: 350,
-      title: '죄송합니다.',
-      contents: '죄송합니다.',
-    });
+    openModal();
   };
 
   return (
@@ -54,16 +56,24 @@ const Modal: React.FC<ModalProps> = ({ title, width, footer, visible, onClose })
               <StyledModalBanner />
               <StyledRentalDescList>
                 {RENTAL_DESCRIPTION.map((desc, index) => (
-                  <StyledRentalDescItem key={index}>{desc}</StyledRentalDescItem>
+                  <StyledRentalDescItem key={index}>
+                    {desc}
+                  </StyledRentalDescItem>
                 ))}
               </StyledRentalDescList>
               <Styledhr />
-              <StyledModalTitle fontSize={18} lineHeight={140} top={30} bottom={5}>
-                오직 <StyledTopintText>사전예약자 </StyledTopintText>분들에게만 <br /> 계약 가능한 시점에 연락을 드릴
-                예정이에요.
+              <StyledModalTitle
+                fontSize={18}
+                lineHeight={140}
+                top={30}
+                bottom={5}
+              >
+                오직 <StyledTopintText>사전예약자 </StyledTopintText>분들에게만{" "}
+                <br /> 계약 가능한 시점에 연락을 드릴 예정이에요.
               </StyledModalTitle>
               <StyledPrecautions bottom={40}>
-                ※ 사전예약을 완료하신 분들만 사전예약자 계약기간에 계약하실 수 있습니다.
+                ※ 사전예약을 완료하신 분들만 사전예약자 계약기간에 계약하실 수
+                있습니다.
               </StyledPrecautions>
               <StyledModalBox>
                 <CheckBox isChecked={false} />
@@ -83,16 +93,24 @@ const Modal: React.FC<ModalProps> = ({ title, width, footer, visible, onClose })
                       <li>사전예약 알림 및 판매 안내</li>
                     </ul>
                   </StyledTabletd>
-                  <StyledTabletd>사전 예약 종료 후 판매 시작 시 까지</StyledTabletd>
+                  <StyledTabletd>
+                    사전 예약 종료 후 판매 시작 시 까지
+                  </StyledTabletd>
                 </StyledTableRow>
               </StyledTable>
               <StyledPrecautions>
-                ※ 고객님께서는 사전예약 참여를 위한 개인 정보 수집 및 이용에 동의하지 않을 수 있습니다. <br />
+                ※ 고객님께서는 사전예약 참여를 위한 개인 정보 수집 및 이용에
+                동의하지 않을 수 있습니다. <br />
                 단, 동의를 하지 않은 경우에는 사전예약 참여가 불가합니다.
               </StyledPrecautions>
             </StyledModalBody>
             <StyledModalFooter>
-              <Button width={488} height={56} className="button-reservation" onClick={handleButtonProess}>
+              <Button
+                width={488}
+                height={56}
+                className="button-reservation"
+                onClick={handleButtonProess}
+              >
                 <span>사전예약 신청하기</span>
               </Button>
             </StyledModalFooter>
@@ -115,7 +133,7 @@ const StyledModal = styled.div`
   margin: 0 auto;
   box-sizing: content-box;
   background: #fff;
-  font-family: 'Noto Sans KR';
+  font-family: "Noto Sans KR";
   z-index: 1000;
 `;
 
@@ -143,7 +161,7 @@ const StyledModalTitle = styled.h2<{
   top?: number;
   bottom?: number;
 }>`
-  margin-top: ${(props) => (props.top ? props.top + 'px' : 0)};
+  margin-top: ${(props) => (props.top ? props.top + "px" : 0)};
   margin-bottom: ${(props) => props.bottom}px;
   font-weight: 700;
   font-size: ${(props) => props.fontSize}px;
@@ -167,7 +185,7 @@ const StyledRentalDescItem = styled.li`
   line-height: 150%;
   color: #77777a;
   &::before {
-    content: '•';
+    content: "•";
     margin-right: 5px;
   }
 `;
@@ -177,8 +195,8 @@ const Styledhr = styled.hr`
 `;
 
 const StyledPrecautions = styled.p<{ bottom?: number; top?: number }>`
-  margin-bottom: ${(props) => (props.bottom ? props.bottom + 'px' : '0')};
-  margin-top: ${(props) => (props.top ? props.top + 'px' : '0')};
+  margin-bottom: ${(props) => (props.bottom ? props.bottom + "px" : "0")};
+  margin-top: ${(props) => (props.top ? props.top + "px" : "0")};
   font-weight: 400;
   font-size: 12px;
   line-height: 150%;
@@ -240,7 +258,7 @@ const StyledTabletd = styled.td`
         margin-top: 10px;
       }
       &::before {
-        content: '•';
+        content: "•";
         margin-right: 5px;
       }
     }

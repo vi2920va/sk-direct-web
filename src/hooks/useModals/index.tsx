@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import AlertModal, { AlertModalProps } from '../../components/molecures/Modals/AlertModal';
+import { useState } from "react";
 
 const useModals = () => {
   const [visible, setVisible] = useState(false);
@@ -11,21 +10,11 @@ const useModals = () => {
     setVisible(false);
   };
 
-  // TODO 함수 실행 안되는 이유 다니엘에게 물어보기
-  const addModal = (action: React.ReactNode | React.ReactElement) => ({
-    action,
-  });
-
-  const openAlertModal = (props: AlertModalProps) => {
-    addModal(<AlertModal {...props} />);
-  };
-
   return {
     visible,
     setVisible,
     openModal,
     closeModal,
-    openAlertModal,
   };
 };
 

@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import Portal from '../Portal';
+import React from "react";
+import styled from "styled-components";
+import Portal from "../Portal";
 
 export interface AlertModalProps {
   title: string;
@@ -12,7 +12,6 @@ export interface AlertModalProps {
 }
 
 const AlertModal: React.FC<AlertModalProps> = ({ width, title }) => {
-  alert('111');
   return (
     <>
       <Portal>
